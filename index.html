@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Zero to API Hero</title>
+
+		<meta name="description" content="#RailsConf 2016: Tips for integrating 3rd party APIs">
+		<meta name="author" content="Cecy Correa, @cecycorrea on Twitter">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+				<section>
+					<h1>Zero to API Hero</h1>
+					<h3>Consuming 3rd party APIs like a pro</h3>
+					<p><small>Cecy Correa, <a href="http://twitter.com/cecycorrea">@cecycorrea</a></small></p>
+					<p><small>#RailsConf 2016</small></p>
+				</section>
+				<section>
+					<h2>Who? Why?</h2>
+					<p>My name is Cecy Correa</p>
+					<p>Associate Engineer at ReturnPath</p>
+					<img src="images/contextio_logo.png" alt="">
+				</section>
+				<section data-background="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif">
+					<div class="highlighted-bg">
+						<h2>I help developers integrate our APIs</h2>
+					</div>
+				</section>
+				<section>
+					<h2>Agenda</h2>
+					<ul>
+						<li class="fragment">HTTP request methods</li>
+						<li class="fragment">HTTP status codes (and what to do about them!)</li>
+						<li class="fragment">Choosing gems</li>
+						<li class="fragment">What if no gem?</li>
+						<li class="fragment">API debugging / testing</li>
+						<li class="fragment">Demo time!</li>
+					</ul>
+				</section>
+				<section data-background="https://media.giphy.com/media/adhuPKADfzrDG/giphy.gif">
+					<h2 class="highlighted-bg">HTTP request methods</h2>
+				</section>
+				<section>
+					<h2>HTTP request methods</h2>
+					<p>Building blocks of the internet!</p>
+					<ul>
+						<li class="fragment">GET</li>
+						<li class="fragment">POST</li>
+						<li class="fragment">PUT</li>
+						<li class="fragment">DELETE</li>
+					</ul>
+					<p class="fragment"><small>You may know this as CRUD.</small></p>
+				</section>
+				<section>
+					<h2>GET it?</h2>
+					<p>Probably the most done GET in the world:</p>
+					<pre><code contenteditable class="ruby fragment">
+GET http://facebook.com
+						</code></pre>
+						<p class="fragment">When you enter a web address on your browser,<br> you're doing a GET.</p>
+				</section>
+				<section data-background="http://i.imgur.com/uDNqsKs.gif">
+					<div class="highlighted-bg">
+						<p>I've talked to some devs who try to do a POST by entering their POST request on the browser!</p>
+					</div>
+				</section>
+				<section>
+						<h2>Understanding request methods is your MAP to understanding an unknown API.</h2>
+						<p class="fragment"><small>There's a couple more building blocks we need to understand first.</small></p>
+				</section>
+				<section>
+					<h2>API Map</h2>
+					<ul>
+							<li class="fragment">VERB / Method</li>
+							<li class="fragment">Resource</li>
+							<li class="fragment">Instances</li>
+						</li>
+					</ul>
+					<pre><code class="fragment">
+	VERB resource/instance
+					</code></pre>
+					<pre><code class="fragment">
+	GET api.com/photos/4918374
+					</code></pre>
+					<p class="fragment"><small>Pretty easy to read, huh!</small></p>
+				</section>
+				<section data-background="https://media.giphy.com/media/xRJZH4Ajr973y/giphy.gif">
+					<h2 class="highlighted-bg">HTTP status codes!</h2>
+				</section>
+				<section>
+					<h2>Status codes</h2>
+					<p class="fragment">Status codes are not arbitrary!</p>
+					<p class="fragment">Some people spend a lot of time picking the right status code!</p>
+					<p class="fragment"><em>(I'm going to focus on the ones used for APIs most often)</em></p>
+				</section>
+				<section>
+					<h2>Status codes in a nutshell</h2>
+					<ul>
+						<li class="fragment">10x: informational</li>
+						<li class="fragment">20x: everything is a-ok 👍</li>
+						<li class="fragment">30x: go away</li>
+						<li class="fragment">40x: YOU messed up</li>
+						<li class="fragment">50x: WE messed up</li>
+					</ul>
+				</section>
+				<section>
+					<h2>200</h2>
+					<ul>
+						<li class="fragment">200: OK! </li>
+						<li class="fragment">201: created! (Instance created successfully.)</li>
+						<li class="fragment">202: accepted (NON-COMMITAL BOYFRIEND)</li>
+					</ul>
+				</section>
+				<section>
+					<h2>300</h2>
+					<p>All about redirects!</p>
+					<p>Most typically used for oauth.</p>
+					<ul>
+						<li class="fragment">302: FOUND! Tells you where the user will be / should be redirected.</li>
+					</ul>
+				</section>
+				<section>
+					<h2>400</h2>
+					<p>Ya done messed up.</p>
+					<ul>
+						<li class="fragment">400: Bad request! Your params are bad and you should feel bad! (i.e. check your params, ensure the request was formed correctly.)</li>
+						<li class="fragment">401: Unauthorized. Are you authenticating your requests correctly?</li>
+						<li class="fragment">403: Forbidden. I understood the question but I won't respond to it.</li>
+						<li class="fragment">404: NOT FOUND! Does the resource instance still exist? Was it deleted?</li>
+					</ul>
+				</section>
+				<section>
+					<p>WE done messed up.</p>
+					<ul>
+						<li class="fragment">500: Unknown server error. Does not compute. Vague. Could be any number of things...</li>
+						<li class="fragment">503: Service unavailable. Is the API down? Are you being throttled? Have you exeeded your API limit?</li>
+					</ul>
+				</section>
+			<section>
+				<h2>Resources</h2>
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</section>
+			<section data-background="http://i.giphy.com/fjgqYjVkzfQ9a.gif">
+				<h2 class="highlighted-bg">Thank you!</h2>
+			</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
