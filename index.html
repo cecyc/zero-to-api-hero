@@ -41,15 +41,15 @@
 			<div class="slides">
 				<section>
 					<h1>Zero to API Hero</h1>
-					<h3>Consuming 3rd party APIs like a pro</h3>
-					<p><small>Cecy Correa, <a href="http://twitter.com/cecycorrea">@cecycorrea</a></small></p>
+					<h2>Consuming 3rd party APIs like a pro</h2>
+					<p>Cecy Correa, <a href="http://twitter.com/cecycorrea">@cecycorrea</a></p>
 					<p><small>#RailsConf 2016</small></p>
 				</section>
 				<section>
 					<h2>Who? Why?</h2>
 					<p>My name is Cecy Correa</p>
 					<p>Associate Engineer at ReturnPath</p>
-					<img src="images/contextio_logo.png" alt="">
+					<img src="images/contextio-logo.png" alt="" style="width:20%">
 				</section>
 				<section data-background="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif">
 					<div class="highlighted-bg">
@@ -57,65 +57,117 @@
 					</div>
 				</section>
 				<section>
+					<h1>The problem</h1>
+				</section>
+				<section>
+					<h2>Too much magic?</h2>
+					<pre><code class="ruby">
+Rails.application.routes.draw do
+  resources :users
+end
+					</code></pre>
+					<pre><code class="ruby">
+$ rake routes
+   Prefix Verb   URI Pattern               Controller#Action
+    users GET    /users(.:format)          users#index
+          POST   /users(.:format)          users#create
+ new_user GET    /users/new(.:format)      users#new
+edit_user GET    /users/:id/edit(.:format) users#edit
+     user GET    /users/:id(.:format)      users#show
+          PATCH  /users/:id(.:format)      users#update
+          PUT    /users/:id(.:format)      users#update
+          DELETE /users/:id(.:format)      users#destroy
+					</code></pre>
+					<p><em>Credit: @schneems</em></p>
+				</section>
+				<section data-background="http://i.imgur.com/uDNqsKs.gif">
+				</section>
+				<section>
 					<h2>Agenda</h2>
+					<p>Tools you can use to consume APIs good (and do other things good too)</p>
 					<ul>
-						<li class="fragment">HTTP request methods</li>
+						<li class="fragment">Anatomy of an API call</li>
 						<li class="fragment">HTTP status codes (and what to do about them!)</li>
-						<li class="fragment">Choosing gems</li>
-						<li class="fragment">What if no gem?</li>
-						<li class="fragment">API debugging / testing</li>
+						<li class="fragment">Working with gems</li>
+						<li class="fragment">Tools, debugging, testing</li>
 						<li class="fragment">Demo time!</li>
 					</ul>
 				</section>
 				<section data-background="https://media.giphy.com/media/adhuPKADfzrDG/giphy.gif">
-					<h2 class="highlighted-bg">HTTP request methods</h2>
+					<h2 class="highlighted-bg">Anatomy of an API call</h2>
 				</section>
 				<section>
-					<h2>HTTP request methods</h2>
-					<p>Building blocks of the internet!</p>
-					<ul>
-						<li class="fragment">GET</li>
-						<li class="fragment">POST</li>
-						<li class="fragment">PUT</li>
-						<li class="fragment">DELETE</li>
-					</ul>
-					<p class="fragment"><small>You may know this as CRUD.</small></p>
+					<h2>Anatomy of an API call</h2>
+					<p>IMAGE</p>
+					<p>URL / endpoint --> resource</p>
+					<p>Method / VERB</p>
+					<p>Headers</p>
+					<p>Body: data being passed around, looser in structure</p>
 				</section>
 				<section>
-					<h2>GET it?</h2>
-					<p>Probably the most done GET in the world:</p>
-					<pre><code contenteditable class="ruby fragment">
-GET http://facebook.com
+
+					<section>
+					<h2>Anatomy of an API call</h2>
+					<p><strong>URL:</strong> aka endpoint</p>
+					<pre><code class="ruby">
+http://mycoolapi.com/photos
+					</code></pre>
+					<p class="fragment"><strong>Resource:</strong> what you are trying to access (in this case <em>photos</em>)</p>
+					</section>
+
+					<section>
+						<h2>Anatomy of an API call</h2>
+						<p><strong>Method:</strong> aka verb</p>
+						<pre><code class="ruby">
+GET http://mycoolapi.com/photos
 						</code></pre>
-						<p class="fragment">When you enter a web address on your browser,<br> you're doing a GET.</p>
+						<p class="fragment">The action you want to do.</p>
+					</section>
+
+					<section>
+						<h2>Anatomy of an API call</h2>
+						<p><strong>Headers:</strong> info about the request / response</p>
+						<pre><code class="ruby">
+GET http://mycoolapi.com/photos
+						</code></pre>
+						<pre><code class="ruby">
+Accept: application/json
+Host: mycoolapi.com
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>Anatomy of an API call</h2>
+						<p><strong>Body:</strong> data sent / received</p>
+						<pre><code class="ruby">
+GET http://mycoolapi.com/photos
+						</code></pre>
+						<pre><code class="ruby">
+Content-type: application/json
+Date: Wed, 3 May 2016 01:23:45
+					</code></pre>
+				<pre><code class="ruby">
+[
+	{
+		"photo_url": "http://mycoolapi.com/photos/12345.jpg"
+	}
+]
+		</code></pre>
 				</section>
-				<section data-background="http://i.imgur.com/uDNqsKs.gif">
-					<div class="highlighted-bg">
-						<p>I've talked to some devs who try to do a POST by entering their POST request on the browser!</p>
-					</div>
-				</section>
+
+		</section>
+
 				<section>
-						<h2>Understanding request methods is your MAP to understanding an unknown API.</h2>
-						<p class="fragment"><small>There's a couple more building blocks we need to understand first.</small></p>
-				</section>
-				<section>
-					<h2>API Map</h2>
+					<h2>Assumptions</h2>
 					<ul>
-							<li class="fragment">VERB / Method</li>
-							<li class="fragment">Resource</li>
-							<li class="fragment">Instances</li>
-						</li>
+						<li class="fragment">Using HTTP protocol</li>
+						<li class="fragment">RESTful API</li>
+						<li class="fragment">Using JSON</li>
 					</ul>
-					<pre><code class="fragment">
-	VERB resource/instance
-					</code></pre>
-					<pre><code class="fragment">
-	GET api.com/photos/4918374
-					</code></pre>
-					<p class="fragment"><small>Pretty easy to read, huh!</small></p>
+					<p class="fragment">Not all APIs are this way, but most you will encounter for public consumption are.</p>
 				</section>
 				<section data-background="https://media.giphy.com/media/xRJZH4Ajr973y/giphy.gif">
-					<h2 class="highlighted-bg">HTTP status codes!</h2>
+					<h2 class="highlighted-bg">HTTP status codes!<br> and what to do about them</h2>
 				</section>
 				<section>
 					<h2>Status codes</h2>
@@ -128,54 +180,97 @@ GET http://facebook.com
 					<ul>
 						<li class="fragment">10x: informational</li>
 						<li class="fragment">20x: everything is a-ok 👍</li>
-						<li class="fragment">30x: go away</li>
+						<li class="fragment">30x: go away (redirects)</li>
 						<li class="fragment">40x: YOU messed up</li>
 						<li class="fragment">50x: WE messed up</li>
 					</ul>
 				</section>
+				<section data-background="http://i.giphy.com/YabqH4YYNJGOk.gif">
+					<h2 class="highlighted-bg">200</h2>
+				</section>
+				<section data-background="http://i0.kym-cdn.com/photos/images/newsfeed/000/148/288/FSM.jpg">
+					<h2 class="highlighted-bg">201: created</h2>
+				</section>
+				<section data-background="http://31.media.tumblr.com/b02dcbcab0de039640ad8cc6cdb04cbe/tumblr_inline_mugmc4ylHK1ra0kdy.gif">
+					<h2 class="highlighted-bg">202</h2>
+				</section>
+				<section data-background="http://i.giphy.com/xT0BKB40Ulk8YKKaAM.gif">
+					<h2 class="highlighted-bg">302</h2>
+				</section>
+				<section data-background="http://i3.ytimg.com/vi/jG2KMkQLZmI/hqdefault.jpg">
+					<h2 class="highlighted-bg">400: Your request is bad and you should feel bad</h2>
+					<p class="fragment highlighted-bg">You should now submit the request again without modifications (i.e. check your params, bro)</p>
+				</section>
+				<section data-background="http://i.giphy.com/xyalr6LBFVobe.gif">
+					<h2 class="highlighted-bg">401: Unauthorized</h2>
+					<p class="fragment highlighted-bg">Check your creds, bro cuz</p>
+				</section>
+				<section data-background="https://s-media-cache-ak0.pinimg.com/736x/44/02/c6/4402c63eb5e342ece86bd72422e426db.jpg">
+					<h2 class="highlighted-bg">403: Forbidden</h2>
+					<p class="fragment highlighted-bg">Creds could be wrong, but also not</p>
+				</section>
+				<section data-background="http://i.giphy.com/10yCCWBLSWKfFC.gif">
+					<h2 class="highlighted-bg">418: I'm a teapot</h2>
+					<p class="fragment highlighted-bg"><a href="https://www.ietf.org/rfc/rfc2324.txt">April Fools' Joke</a></p>
+				</section>
+				<section data-background="http://i.makeagif.com/media/9-11-2015/YOSxdz.gif">
+					<h2 class="highlighted-bg">500</h2>
+					<p class="fragment highlighted-bg">Standard error. Not sure what happened but def. not your fault.</p>
+				</section>
+				<section data-background="http://thepapermama.com/wp-content/uploads/dubstepcat-1.gif">
+					<h2 class="highlighted-bg">503: Unavailable</h2>
+					<p class="fragment highlighted-bg">API could be down, or maybe throttling</p>
+				</section>
 				<section>
-					<h2>200</h2>
+					<h1>For real,<br>pay attention to the status code you get!</h1>
+				</section>
+				<section>
+					<h2>Authentication</h2>
 					<ul>
-						<li class="fragment">200: OK! </li>
-						<li class="fragment">201: created! (Instance created successfully.)</li>
-						<li class="fragment">202: accepted (NON-COMMITAL BOYFRIEND)</li>
+						<li clas="fragment">No authentication</li>
+						<li clas="fragment">Developer authentication</li>
+						<li clas="fragment">User authentication</li>
 					</ul>
 				</section>
 				<section>
-					<h2>300</h2>
-					<p>All about redirects!</p>
-					<p>Most typically used for oauth.</p>
+					<h2>No authentication</h2>
+					<p>Some APIs don't require authentication</p>
 					<ul>
-						<li class="fragment">302: FOUND! Tells you where the user will be / should be redirected.</li>
+						<li clas="fragment">OMDB</li>
+						<li clas="fragment">Spotify</li>
 					</ul>
 				</section>
 				<section>
-					<h2>400</h2>
-					<p>Ya done messed up.</p>
-					<ul>
-						<li class="fragment">400: Bad request! Your params are bad and you should feel bad! (i.e. check your params, ensure the request was formed correctly.)</li>
-						<li class="fragment">401: Unauthorized. Are you authenticating your requests correctly?</li>
-						<li class="fragment">403: Forbidden. I understood the question but I won't respond to it.</li>
-						<li class="fragment">404: NOT FOUND! Does the resource instance still exist? Was it deleted?</li>
-					</ul>
+					<h2>Developer authentication</h2>
+					<p>API key / secret</p>
+					<p>Sometimes in the header, sometimes as part of the URL</p>
+					<p>Depends on the API :/</p>
 				</section>
 				<section>
-					<p>WE done messed up.</p>
-					<ul>
-						<li class="fragment">500: Unknown server error. Does not compute. Vague. Could be any number of things...</li>
-						<li class="fragment">503: Service unavailable. Is the API down? Are you being throttled? Have you exeeded your API limit?</li>
-					</ul>
+					<h2>User authentication</h2>
+					<p>Oauth is commonly used</p>
+					<p>Oauth 1.0 and 2.0</p>
+					<p>Lots of libraries you can use to handle Oauth.</p>
+					<p>Some APIs will handle oauth for you!</p>
+				</section>
+				<section>
+					<h2>Authentication vs. Authorization</h2>
+					<p>Authentication: prove you are who you say you are</p>
+					<p>Authorization: what you are authorized to access (aka scope)</p>
+				</section>
+				<section>
+					<p>DEMO: Let's make an Oauth request and see how it works!</p>
 				</section>
 			<section>
 				<h2>Resources</h2>
 				<ul>
-					<li></li>
-					<li></li>
+					<li><a href="https://zapier.com/learn/apis/">Super basic primer on APIs by Zapier</a></li>
+					<li><a href="https://github.com/toddmotto/public-apis">Great collection of public APIs!</a></li>
 					<li></li>
 					<li></li>
 				</ul>
 			</section>
-			<section data-background="http://i.giphy.com/fjgqYjVkzfQ9a.gif">
+			<section data-background="http://i.giphy.com/ZLxT4KnmVdt1C.gif">
 				<h2 class="highlighted-bg">Thank you!</h2>
 			</section>
 			</div>
