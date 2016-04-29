@@ -224,6 +224,9 @@ Date: Wed, 3 May 2016 01:23:45
 				<section>
 					<h1>For real,<br>pay attention to the status code you get!</h1>
 				</section>
+				<section data-background="images/authentication.gif">
+
+				</section>
 				<section>
 					<h2>Authentication</h2>
 					<ul>
@@ -237,37 +240,212 @@ Date: Wed, 3 May 2016 01:23:45
 					<p>Some APIs don't require authentication</p>
 					<ul>
 						<li clas="fragment">OMDB</li>
-						<li clas="fragment">Spotify</li>
+						<li clas="fragment">Open Weather Map</li>
+						<li class="fragment">Data.gov</li>
+						<li class="fragment">Comic Vine</li>
 					</ul>
 				</section>
 				<section>
 					<h2>Developer authentication</h2>
-					<p>API key / secret</p>
-					<p>Sometimes in the header, sometimes as part of the URL</p>
-					<p>Depends on the API :/</p>
+					<p clas="fragment">Some APIs require authentication in the form of an API key and secret.</p>
+					<p clas="fragment">How you authenticate via API key and secret depends on the API:</p>
+					<ul>
+						<li clas="fragment">As part of the URL</li>
+						<li clas="fragment">In the Headers</li>
+					</ul>
+					<p clas="fragment">Check your API docs for information on how to authenticate.</p>
+				</section>
+				<section>
+					<h2>DEMO</h2>
+					<p>Let's make some test calls!</p>
+					<ul>
+						<li clas="fragment">API that requires no authentication</li>
+						<li clas="fragment">API that requires some authentication</li>
+					</ul>
+					<p class="fragment">We'll use cURL for this!</p>
+				</section>
+				<section>
+					<img style="width:100%" src="https://dl.dropboxusercontent.com/u/32684641/gifs/curl-omdb.gif">
+				</section>
+				<section>
+					<!-- sorry for the inline styles, just doing quick and dirrrrty! -->
+					<img style="width:100%" src="https://dl.dropboxusercontent.com/u/32684641/gifs/curl-meetup.gif">
+				</section>
+				<section>
+					<h1>We just used cURL to make API calls!<br>Anyone can do this!</h1>
+					<p>No excuse for not making test calls <em>before</em> you start integrating the API.</p>
 				</section>
 				<section>
 					<h2>User authentication</h2>
-					<p>Oauth is commonly used</p>
-					<p>Oauth 1.0 and 2.0</p>
-					<p>Lots of libraries you can use to handle Oauth.</p>
-					<p>Some APIs will handle oauth for you!</p>
+					<p clas="fragment">In some cases, users may need to grant you permission to access their data or perform actions on their behalf.</p>
+					<ul>
+						<li clas="fragment">OAuth 1.0 and 2.0</li>
+						<li clas="fragment">OAuth dance can be complicated, but lots of libraries available!</li>
+						<li clas="fragment">Some APIs facilitate this process.</li>
+					</ul>
 				</section>
 				<section>
 					<h2>Authentication vs. Authorization</h2>
-					<p>Authentication: prove you are who you say you are</p>
-					<p>Authorization: what you are authorized to access (aka scope)</p>
+					<p class="fragment"><strong>Authentication:</strong> prove you are who you say you are</p>
+					<p class="fragment"><strong>Authorization:</strong> what you are authorized to access (aka scope)</p>
+					<img src="images/gmail-scope.png" class="fragment">
 				</section>
 				<section>
-					<p>DEMO: Let's make an Oauth request and see how it works!</p>
+					<h2>Demo</h2>
+					<p>Let's make an Oauth request and see how it works!</p>
+				</section>
+				<section>
+					<img style="width:100%" src="https://dl.dropboxusercontent.com/u/32684641/gifs/sample-oauth.gif">
+				</section>
+				<section data-background="http://i.giphy.com/2WuHHWbGt3fY4.gif">
+					<h2 class="highlighted-bg">Tools for productivity!</h2>
+				</section>
+				<section>
+					<h2>Postman</h2>
+					<ul>
+						<li>Make API calls</li>
+						<li>Save API calls</li>
+						<li>Create environment variables to reuse</li>
+						<li>Create teams</li>
+						<li>Save "runs"</li>
+						<li>Download "code"</li>
+						<li>Download "logs"</li>
+					</ul>
+				</section>
+				<section data-background="http://i.giphy.com/P8jUKD1yczZkc.gif">
+					<h2 class="highlighted-bg">Gems</h2>
+				</section>
+				<section>
+					<h2>Official API wrappers / libraries</h2>
+					<ul>
+						<li class="fragment">Look for official libraries</li>
+						<li class="fragment">Lots of maintainers</li>
+						<li class="fragment">Recently updated</li>
+						<li class="fragment">Good documentation</li>
+					</ul>
+				</section>
+				<section>
+					<h1>What if there are no libraries available?</h1>
+					<p>Or if you don't like the library that <em>is</em> available?</p>
+				</section>
+				<section>
+					<h2>Develop against the REST API!</h2>
+					<p class="fragment">It's easy!</p>
+					<p class="fragment">You know the basics!</p>
+					<p class="fragment">You know the components of a call</p>
+					<p class="fragment">If you've made test calls, you know what to expect</p>
+				</section>
+				<section>
+					<h2>HTTP client</h2>
+					<ul>
+						<li class="fragment">HTTParty</li>
+						<li class="fragment">Faraday</li>
+						<li class="fragment">HTTP: The Gem!</li>
+						<li class="fragment">Net::HTTP</li>
+					</ul>
+					<p class="fragment"><a href="http://www.slideshare.net/HiroshiNakamura/rubyhttp-clients-comparison">Great presentation by Hiroshi Nakamura comparing HTTP clients</a></p>
+				</section>
+				<section>
+					<h2>All HTTP clients are not created equal</h2>
+					<p>3 "pure Ruby" libraries</p>
+					<ul>
+						<li class="fragment">Net::HTTP</li>
+						<li class="fragment">Excon</li>
+						<li class="fragment">httpclient</li>
+					</ul>
+					<p class="fragment">Also patron, which uses libcurl</p>
+					<p class="fragment">Other Ruby libraries are wrappers of these ^^</p>
+				</section>
+				<section>
+					<h2>All HTTP clients are not created equal</h2>
+					<ul>
+						<li class="fragment">HTTParty: wrapper for Net::HTTP</li>
+						<li class="fragment">Faraday: select between Net::HTTP, Excon, or patron</li>
+						<li class="fragment">HTTP: The Gem! is "Native implementation of HTTP"</li>
+					</ul>
+					<p class="fragment">You're going to want to do some research into what you may need / want.</p>
+				</section>
+				<section>
+					<h2>Demo: Using HTTParty to create your own wrapper</h2>
+				</section>
+				<section data-background="https://media.giphy.com/media/ToMjGpM4h8DAsgL0fEA/giphy-facebook_s.jpg">
+					<h2 class="highlighted-bg">Yo dawg, I heard you like HTTP wrappers...</h2>
+				</section>
+				<section data-background="https://s-media-cache-ak0.pinimg.com/736x/7e/94/9a/7e949a09b3f6188e401be8969e43a3fa.jpg">
+					<h2 class="highlighted-bg">It's an older meme, but it checks out</h2>
+				</section>
+				<section>
+					<h2>PLACEHOLDER DEMO</h2>
+				</section>
+				<section data-background="https://media.giphy.com/media/WM3HX2cZ3zTry/giphy.gif">
+					<h2 class="highlighted-bg">Testing &amp; Debugging</h2>
+				</section>
+				<section>
+					<h2>Testing</h2>
+					<p>How do you test a 3rd party API you are consuming?</p>
+					<ul>
+						<li class="fragment">Should you test to see if the API is down?</li>
+						<li class="fragment">Should you test API functionality?</li>
+						<li class="fragment">Should you test your integration of the API?</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Testing</h2>
+					<p>How do you test a 3rd party API you are consuming?</p>
+					<ul>
+						<li><strike>Should you test to see if the API is down?</strike></li>
+						<li><strike>Should you test API functionality?</strike></li>
+						<li>Should you test your integration of the API? YES!</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Need to know if API is down?</h2>
+					<p class="fragment">Check the API status page!</p>
+					<p class="fragment">Most APIs have it.</p>
+					<p class="fragment">Subscribe to it, feed it into Slack.</p>
+				</section>
+				<section>
+					<h2>Want to test API functionality?</h2>
+					<p class="fragment">WHY?</p>
+					<p class="fragment">If you don't trust the API you're consuming <em>don't consume it.</em></p>
+				</section>
+				<section>
+					<h2>Testing your integration</h2>
+					<p class="fragment">Don't test against a live API.</p>
+					<p class="fragment">Don't test against a live API.</p>
+					<p class="fragment">Don't test against a live API.</p>
+				</section>
+				<section>
+					<h2>Testing your integration: best practices</h2>
+					<ul>
+						<li class="fragment">Mock API responses</li>
+						<li class="fragment">Test how you handle the responses, errors</li>
+						<li class="fragment">Clean up after yourself!</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Testing your integration: mocking responses</h2>
+					<p class="fragment">VCR: gem that "records" API responses</p>
+					<p class="fragment">Run your tests against it so you don't hit the live API</p>
+					<p class="fragment">There's even versions of VCR in other languages!</p>
+				</section>
+				<section>
+					<h2>Debugging</h2>
+					<ul>
+						<li class="fragment">Request Bin</li>
+						<li class="fragment">Runscope</li>
+						<li class="fragment">Mockbin</li>
+					</ul>
 				</section>
 			<section>
 				<h2>Resources</h2>
 				<ul>
 					<li><a href="https://zapier.com/learn/apis/">Super basic primer on APIs by Zapier</a></li>
 					<li><a href="https://github.com/toddmotto/public-apis">Great collection of public APIs!</a></li>
-					<li></li>
-					<li></li>
+					<li><a href="http://devblog.avdi.org/2015/10/16/results-of-ruby-http-client-library-survey/">HTTP client survey by Avdi Grimm</a></li>
+					<li><a href="http://jvns.ca/blog/2016/03/04/whats-up-with-ruby-http-libraries/">What's up with Ruby libraries, Julia Evans</a></li>
+					<li><a href="http://www.slideshare.net/HiroshiNakamura/rubyhttp-clients-comparison">HTTP client comparison</a></li>
+					<li><a href="https://github.com/Runscope/requestbin">Deploy your own Request Bin on Heroku</a></li>
 				</ul>
 			</section>
 			<section data-background="http://i.giphy.com/ZLxT4KnmVdt1C.gif">
