@@ -172,6 +172,7 @@ Date: Wed, 3 May 2016 01:23:45
 				<section>
 					<h2>Status codes</h2>
 					<p class="fragment">Status codes are not arbitrary!</p>
+					<p class="fragment">Status codes have been established, agreed upon (<a href="https://tools.ietf.org/html/rfc7231">RFC 7231</a>)</p>
 					<p class="fragment">Some people spend a lot of time picking the right status code!</p>
 					<p class="fragment"><em>(I'm going to focus on the ones used for APIs most often)</em></p>
 				</section>
@@ -203,15 +204,24 @@ Date: Wed, 3 May 2016 01:23:45
 				</section>
 				<section data-background="http://i.giphy.com/xyalr6LBFVobe.gif">
 					<h2 class="highlighted-bg">401: Unauthorized</h2>
-					<p class="fragment highlighted-bg">Check your creds, bro cuz</p>
+					<p class="fragment highlighted-bg">Check your creds, bro</p>
 				</section>
 				<section data-background="https://s-media-cache-ak0.pinimg.com/736x/44/02/c6/4402c63eb5e342ece86bd72422e426db.jpg">
 					<h2 class="highlighted-bg">403: Forbidden</h2>
 					<p class="fragment highlighted-bg">Creds could be wrong, but also not</p>
 				</section>
+				<section>
+					<h2>404</h2>
+					<img style="width:60%" src="images/404ed.png" alt="">
+				</section>
 				<section data-background="http://i.giphy.com/10yCCWBLSWKfFC.gif">
 					<h2 class="highlighted-bg">418: I'm a teapot</h2>
 					<p class="fragment highlighted-bg"><a href="https://www.ietf.org/rfc/rfc2324.txt">April Fools' Joke</a></p>
+					<p class="fragment highlighted-bg"><a href="http://www.google.com/teapot">Found in the wild?</a></p>
+				</section>
+				<section>
+					<h2>429: API limit reached</h2>
+					<img style="width:50%" src="images/limit.gif" alt="">
 				</section>
 				<section data-background="http://i.makeagif.com/media/9-11-2015/YOSxdz.gif">
 					<h2 class="highlighted-bg">500</h2>
@@ -223,6 +233,7 @@ Date: Wed, 3 May 2016 01:23:45
 				</section>
 				<section>
 					<h1>For real,<br>pay attention to the status code you get!</h1>
+					<p>No one expects you to memorize them, you can <a href="https://httpstatuses.com/">look them up.</a></p>
 				</section>
 				<section data-background="images/authentication.gif">
 
@@ -230,37 +241,36 @@ Date: Wed, 3 May 2016 01:23:45
 				<section>
 					<h2>Authentication</h2>
 					<ul>
-						<li clas="fragment">No authentication</li>
-						<li clas="fragment">Developer authentication</li>
-						<li clas="fragment">User authentication</li>
+						<li class="fragment">No authentication</li>
+						<li class="fragment">Developer authentication</li>
+						<li class="fragment">User authentication</li>
 					</ul>
 				</section>
 				<section>
 					<h2>No authentication</h2>
 					<p>Some APIs don't require authentication</p>
 					<ul>
-						<li clas="fragment">OMDB</li>
-						<li clas="fragment">Open Weather Map</li>
+						<li class="fragment">OMDB</li>
+						<li class="fragment">Open Weather Map</li>
 						<li class="fragment">Data.gov</li>
-						<li class="fragment">Comic Vine</li>
 					</ul>
 				</section>
 				<section>
 					<h2>Developer authentication</h2>
-					<p clas="fragment">Some APIs require authentication in the form of an API key and secret.</p>
-					<p clas="fragment">How you authenticate via API key and secret depends on the API:</p>
+					<p class="fragment">Some APIs require authentication in the form of an API key and secret.</p>
+					<p class="fragment">How you authenticate via API key and secret depends on the API:</p>
 					<ul>
-						<li clas="fragment">As part of the URL</li>
-						<li clas="fragment">In the Headers</li>
+						<li class="fragment">As part of the URL</li>
+						<li class="fragment">In the Headers</li>
 					</ul>
-					<p clas="fragment">Check your API docs for information on how to authenticate.</p>
+					<p class="fragment">Check your API docs for information on how to authenticate.</p>
 				</section>
 				<section>
 					<h2>DEMO</h2>
 					<p>Let's make some test calls!</p>
 					<ul>
-						<li clas="fragment">API that requires no authentication</li>
-						<li clas="fragment">API that requires some authentication</li>
+						<li class="fragment">API that requires no authentication</li>
+						<li class="fragment">API that requires some authentication</li>
 					</ul>
 					<p class="fragment">We'll use cURL for this!</p>
 				</section>
@@ -277,11 +287,11 @@ Date: Wed, 3 May 2016 01:23:45
 				</section>
 				<section>
 					<h2>User authentication</h2>
-					<p clas="fragment">In some cases, users may need to grant you permission to access their data or perform actions on their behalf.</p>
+					<p class="fragment">In some cases, users may need to grant you permission to access their data or perform actions on their behalf.</p>
 					<ul>
-						<li clas="fragment">OAuth 1.0 and 2.0</li>
-						<li clas="fragment">OAuth dance can be complicated, but lots of libraries available!</li>
-						<li clas="fragment">Some APIs facilitate this process.</li>
+						<li class="fragment">OAuth 1.0 and 2.0</li>
+						<li class="fragment">OAuth dance can be complicated, but lots of libraries available!</li>
+						<li class="fragment">Some APIs facilitate this process.</li>
 					</ul>
 				</section>
 				<section>
@@ -300,17 +310,22 @@ Date: Wed, 3 May 2016 01:23:45
 				<section data-background="http://i.giphy.com/2WuHHWbGt3fY4.gif">
 					<h2 class="highlighted-bg">Tools for productivity!</h2>
 				</section>
+				<section data-background="images/postman.png">
+					<h2 class="highlighted-bg">Postman</h2>
+				</section>
 				<section>
 					<h2>Postman</h2>
+					<p>Crazy useful functionality for working with APIs!</p>
 					<ul>
-						<li>Make API calls</li>
-						<li>Save API calls</li>
-						<li>Create environment variables to reuse</li>
-						<li>Create teams</li>
-						<li>Save "runs"</li>
-						<li>Download "code"</li>
-						<li>Download "logs"</li>
+						<li class="fragment">Make API calls</li>
+						<li class="fragment">Save API calls</li>
+						<li class="fragment">Create environments to reuse</li>
+						<li class="fragment">Save "runs"</li>
+						<li class="fragment">Download sample "code"</li>
 					</ul>
+				</section>
+				<section>
+					<h2>Demo: Let's make an Oauth 1.0 call with Postman</h2>
 				</section>
 				<section data-background="http://i.giphy.com/P8jUKD1yczZkc.gif">
 					<h2 class="highlighted-bg">Gems</h2>
@@ -368,14 +383,13 @@ Date: Wed, 3 May 2016 01:23:45
 				<section>
 					<h2>Demo: Using HTTParty to create your own wrapper</h2>
 				</section>
-				<section data-background="https://media.giphy.com/media/ToMjGpM4h8DAsgL0fEA/giphy-facebook_s.jpg">
-					<h2 class="highlighted-bg">Yo dawg, I heard you like HTTP wrappers...</h2>
-				</section>
-				<section data-background="https://s-media-cache-ak0.pinimg.com/736x/7e/94/9a/7e949a09b3f6188e401be8969e43a3fa.jpg">
-					<h2 class="highlighted-bg">It's an older meme, but it checks out</h2>
+				<section data-background="http://45.media.tumblr.com/tumblr_m58dviJMNv1rx808ho1_500.gif">
+					<h2 class="highlighted-bg">INCEPTION</h2>
 				</section>
 				<section>
-					<h2>PLACEHOLDER DEMO</h2>
+					<h1>Caution!</h1>
+					<p>Never commit your API key / secret to source control!</p>
+					<p class="fragment">Use environment variables!</p>
 				</section>
 				<section data-background="https://media.giphy.com/media/WM3HX2cZ3zTry/giphy.gif">
 					<h2 class="highlighted-bg">Testing &amp; Debugging</h2>
@@ -385,7 +399,7 @@ Date: Wed, 3 May 2016 01:23:45
 					<p>How do you test a 3rd party API you are consuming?</p>
 					<ul>
 						<li class="fragment">Should you test to see if the API is down?</li>
-						<li class="fragment">Should you test API functionality?</li>
+						<li class="fragment">Should you test against the live API?</li>
 						<li class="fragment">Should you test your integration of the API?</li>
 					</ul>
 				</section>
@@ -394,8 +408,8 @@ Date: Wed, 3 May 2016 01:23:45
 					<p>How do you test a 3rd party API you are consuming?</p>
 					<ul>
 						<li><strike>Should you test to see if the API is down?</strike></li>
-						<li><strike>Should you test API functionality?</strike></li>
-						<li>Should you test your integration of the API? YES!</li>
+						<li><strike>Should you test against the live API?</strike></li>
+						<li class="yellow-highlight">Should you test your integration of the API? YES!</li>
 					</ul>
 				</section>
 				<section>
@@ -405,12 +419,10 @@ Date: Wed, 3 May 2016 01:23:45
 					<p class="fragment">Subscribe to it, feed it into Slack.</p>
 				</section>
 				<section>
-					<h2>Want to test API functionality?</h2>
-					<p class="fragment">WHY?</p>
-					<p class="fragment">If you don't trust the API you're consuming <em>don't consume it.</em></p>
+					<h2>#REALTALK</h2>
+					<h3>Why not test against the live API?</h3>
 				</section>
 				<section>
-					<h2>Testing your integration</h2>
 					<p class="fragment">Don't test against a live API.</p>
 					<p class="fragment">Don't test against a live API.</p>
 					<p class="fragment">Don't test against a live API.</p>
@@ -418,7 +430,7 @@ Date: Wed, 3 May 2016 01:23:45
 				<section>
 					<h2>Testing your integration: best practices</h2>
 					<ul>
-						<li class="fragment">Mock API responses</li>
+						<li class="fragment">Mock / stubb API responses</li>
 						<li class="fragment">Test how you handle the responses, errors</li>
 						<li class="fragment">Clean up after yourself!</li>
 					</ul>
@@ -430,6 +442,12 @@ Date: Wed, 3 May 2016 01:23:45
 					<p class="fragment">There's even versions of VCR in other languages!</p>
 				</section>
 				<section>
+					<h1>Trust &amp; Communication are key</h1>
+				</section>
+				<section>
+					<h2>Debugging &amp; webhooks</h2>
+				</section>
+				<section>
 					<h2>Debugging</h2>
 					<ul>
 						<li class="fragment">Request Bin</li>
@@ -437,8 +455,23 @@ Date: Wed, 3 May 2016 01:23:45
 						<li class="fragment">Mockbin</li>
 					</ul>
 				</section>
+				<section data-background="images/requestbin.png">
+					<h2 class="highlighted-bg">Request Bin</h2>
+				</section>
+				<section data-background="images/runscope.png">
+					<h2 class="highlighted-bg">Runscope</h2>
+				</section>
+				<section data-background="images/mockbin.png">
+					<h2 class="highlighted-bg">Mockbin</h2>
+				</section>
+				<section>
+					<h2>Live Demo!</h2>
+					<p>Let's set up a webhook and test it.</p>
+					<p>Tweet anything to @cecycorrea to see it in action!</p>
+				</section>
 			<section>
 				<h2>Resources</h2>
+				<p>Slides: <a href="https://github.com/cecyc/zero-to-api-hero">github.com/cecyc/zero-to-api-hero</a></p>
 				<ul>
 					<li><a href="https://zapier.com/learn/apis/">Super basic primer on APIs by Zapier</a></li>
 					<li><a href="https://github.com/toddmotto/public-apis">Great collection of public APIs!</a></li>
@@ -452,7 +485,6 @@ Date: Wed, 3 May 2016 01:23:45
 				<h2 class="highlighted-bg">Thank you!</h2>
 			</section>
 			</div>
-
 		</div>
 
 		<script src="lib/js/head.min.js"></script>

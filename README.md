@@ -32,13 +32,17 @@ Try making these calls in cURL:
 
 ####Oauth 1.0 call
 
-This call requires Oauth 1.0 HMAC-SHA1. Try using POSTMAN to make this call (you must sign up for a Twitter API key).
+This call to the Twitter API requires Oauth 1.0 HMAC-SHA1. Try using POSTMAN to make this call (you must sign up for a Twitter API key).
 
 Base url: `https://api.twitter.com/1.1/users/show.json?`
 
 Params: `screen_name=USERNAME`
 
-Using the Authorization builder, pass in your consumer key and secret. Timestamp, nonce, and version should be selected / pre-populated. Make sure "encode Oauth signature" is checked. Click on "update request" to populate this info into the call.
+Using the Authorization builder, pass in your consumer key and secret. Timestamp, nonce, and version should be selected / pre-populated. Make sure "encode oauth signature" is checked. Click on "update request" to populate this info into the call.
+
+####Oauth Rails example
+
+* [Sample app](https://github.com/cecyc/sample-cio-app) using Context.IO API to test authenticating a user with OAuth.
 
 ###Tools for testing / debugging
 

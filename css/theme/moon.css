@@ -295,3 +295,8 @@ body {
      background-color: rgba(0,0,0,0.5);
      color: white;
    }
+
+   .yellow-highlight {
+     background-color: yellow;
+     color: #002b36;
+   }
